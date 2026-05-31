@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block title %}
+| {{ post.title }}
+{% endblock title %}
+{% block content %}
+    <!-- Breadcrumb -->
+    <section id="bc" class="mt-3">
+        <div class="container">
+          <nav>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="{% url 'index' %}">خانه</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a href="{% url 'posts' %}">پست ها</a>
+              </li>
+              <li class="breadcrumb-item active"> {{ post.title }}</li>
+            </ol>
+          </nav>
+        </div>
+      </section>
+      <section>
+        <h2 class="text-center">{{ post.title }}</h2>
+      </section>
+  
+      <!-- Listing -->
+      <section id="listing" class="py-4">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <!-- Home Main Image -->
+              <img src="{{ post.photo_main.url }}" alt="" class="img-main img-fluid mb-3" />
+              <!-- Thumbnails -->
+              <div class="row mb-5 thumbs">
+                {% if post.photo_1 %}
+                <div class="col-md-2">
+                  <a href="{{ post.photo_1.url }}" data-lightbox="home-images">
+                    <img src="{{ post.photo_1.url }}" alt="" class="img-fluid" />
+                  </a>
+                </div>
+                {% endif %}
+                {% if post.photo_2 %}
+                <div class="col-md-2">
+                  <a href="{{ post.photo_2.url }}" data-lightbox="home-images">
+                    <img src="{{ post.photo_2.url }}" alt="" class="img-fluid" />
+                  </a>
+                </div>
+                {% endif %}
+                {% if post.photo_3 %}
+                <div class="col-md-2">
+                  <a href="{{ post.photo_3.url }}" data-lightbox="home-images">
+                    <img src="{{ post.photo_3.url }}" alt="" class="img-fluid" />
+                  </a>
+                </div>
+                {% endif %}
+                {% if post.photo_4 %}
+                <div class="col-md-2">
+                  <a href="{{ post.photo_4.url }}" data-lightbox="home-images">
+                    <img src="{{ post.photo_4.url }}" alt="" class="img-fluid" />
+                  </a>
+                </div>
+                {% endif %}
+                {% if post.photo_5 %}
+                <div class="col-md-2">
+                  <a href="{{ post.photo_5.url }}" data-lightbox="home-images">
+                    <img src="{{ post.photo_5.url }}" alt="" class="img-fluid" />
+                  </a>
+                </div>
+                {% endif %}
+                {% if post.photo_6 %}
+                <div class="col-md-2">
+                  <a href="{{ post.photo_6.url }}" data-lightbox="home-images">
+                    <img src="{{ post.photo_6.url }}" alt="" class="img-fluid" />
+                  </a>
+                </div>
+                {% endif %}
+                
+              </div>
+              <!-- Fields -->
+              <div class="row mb-5 fields">
+                <div class="col-md-6">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-secondary">
+                      <i class="fas fa-user"></i>
+                      نویسنده:
+                      <span>{{ post.blogger }}</span>
+                    </li>
+                    <li class="list-group-item text-secondary">
+                      <i class="fas fa-calendar"></i>
+                      تاریخ:
+                      <span>{{ post.post_date }}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-secondary">
+                      <i class="fas fa-thumbs-up"></i>
+                      <span>{{ post.likes_count }}</span>
+                    </li>
+                    <li class="list-group-item text-secondary">
+                      <i class="fas fa-comments"></i>
+                      <span>{{ post.comments_count }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+  
+              <!-- Description -->
+              <div class="row mb-5">
+                <div class="col-md-12">
+                  <p style="font-size: 20px;">
+                   {{ post.text }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock content %}

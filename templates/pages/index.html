@@ -1,0 +1,66 @@
+
+{% extends "base.html" %}
+{% load humanize %}
+{% block title %}
+| welcome
+{% endblock title %}
+
+
+{% load static %}
+{% block content %}
+
+
+    <!-- Listings -->
+    <section id="listings" class="py-3" style="margin-bottom: 3rem">
+      <div class="container">
+        <h3 class="text-center mb-3">آخرین پست ها</h3>
+         <!-- alerts-->
+         {% include 'partials/_alerts.html' %}
+         
+        <div class="row">
+           <!-- Listing 1 -->
+           
+           {% if posts %}
+           {% for post in posts %}
+             <div class="col-md-6 col-lg-4 mb-4">
+               <div class="card listing-preview">
+                 <div style="position: relative">
+                   <img class="card-img-top" src="{{ post.photo_main.url }}" alt="" />
+                   <div class="text-image-config p-1">
+                     <span class="badge text-white" style="background-color: #cb1c8d">{{ post.comments_count | intcomma }} <i
+                         class="fas fa-comment"></i></span>
+                     <span class="badge text-white mr-2" style="background-color: #e0144c">{{ post.likes_count | intcomma }} <i
+                         class="fas fa-heart"></i></span>
+                   </div>
+                 </div>
+                 <!-- <div class="card-body text-truncate" style="display: -webkit-box !important; -webkit-line-clamp: 4; -webkit-box-orient: vertical; white-space: normal"> -->
+                 <div class="card-body" style="font-size: 13px; padding-bottom: 0">
+                   <div class="listing-heading text-right">
+                     <h4 class="text-primary"> {{ post.title }} </h4>
+                     <p><i class="fas fa-pen" style="color: #e0144c"></i> {{ post.blogger }} </p>
+                   </div>
+                   <hr />
+                   <div class="multiline-ellipsis text-right">
+                     {{ post.text  }}
+                   </div>
+                 </div>
+                 <hr />
+                 <div class="px-3 pb-3 pt-0" style="padding-top: 0">
+                   <a href="{% url 'post' post.id %}" class="btn btn-primary btn-block">بیشتر...</a>
+                 </div>
+               </div>
+             </div>
+           {% endfor %}
+         {% else %}
+            <div class="col_md_12">هیچ پستی وجود ندارد</div>
+         {% endif %} 
+          
+          
+
+
+      </div>
+
+  </section>
+  <!-- End Listings -->
+{% endblock content %}
+ 

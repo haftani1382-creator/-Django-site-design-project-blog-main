@@ -1,0 +1,99 @@
+{% load static %}
+ 
+ <!-- Header -->
+  <header class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top header" id="header">
+    <div class="container">
+      <div class="header_toggle"><i class="bx bx-menu text-white" id="header-toggle"></i></div>
+
+      <a class="navbar-brand" href="{% url 'index' %}">
+        <img src="{% static 'img/logo.png' %}" class="logo" alt="Logo" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav">
+          <li 
+             {% if '/' == request.path %}
+               class="nav-item active mr-3"
+             {% else %}  
+               class="nav-item mr-3"
+             {% endif %}   
+          >
+            <a class="nav-link" href="{% url 'index' %}">خانه</a>
+          </li>
+          <li 
+             {% if 'about' in request.path %}
+                class="nav-item active mr-3"
+             {% else %}  
+                class="nav-item mr-3"
+             {% endif %} 
+          >
+            <a class="nav-link" href="{% url 'about' %}">درباره</a>
+          </li>
+          <li 
+            {% if 'posts' in request.path %}
+              class="nav-item active mr-3"
+            {% else %}  
+              class="nav-item mr-3"
+            {% endif %} 
+       >
+              <a class="nav-link" href="{% url 'posts' %}">لیست پست ها</a>
+            </li>
+        </ul>
+        <div class="mr-auto">
+          <form action="{% url 'search' %}">
+            <div class="input-group input-group-sm">
+              <button type="submit" class="input-group-text" id="basic-addon1"
+                style="border-radius: 0 3px 3px 0 !important"><i class="fas fa-search"></i></button>
+              <input type="text" class="form-control" placeholder="جستجو..." aria-label="Username"
+                aria-describedby="basic-addon1" name="search_text" />
+            </div>
+          </form>
+        </div>
+        {% if user.is_authenticated %}
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active mr-3">
+                <a class="nav-link">{{user.username}}</a>
+            </li>
+            <li class="nav-item active mr-3">
+                <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link"><i class="fas fa-sign-out-alt"></i> خروج</a>
+                <form action="{% url 'logout' %}" id="logout" method="POST" >
+                  {% csrf_token %}
+                  <input type="hidden">
+                </form>
+            </li>
+          </ul>
+      
+        {% else %}
+          <ul class="navbar-nav mr-auto">
+            <li 
+              {% if 'register' in request.path %}
+              class="nav-item active mr-3"
+              {% else %}  
+                class="nav-item mr-3"
+              {% endif %} 
+            >
+              <a class="nav-link" href="{% url 'register' %}"><i class="fas fa-user-plus"></i> ثبت نام </a>
+            </li>
+            <li 
+              {% if 'login' in request.path %}
+                class="nav-item active mr-3"
+              {% else %}  
+                class="nav-item mr-3"
+              {% endif %} 
+            >
+              <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> ورود </a>
+            </li>
+          </ul>
+
+
+        {% endif %}
+
+
+
+      
+      </div>
+    </div>
+  </header>
+  <!-- End Header -->

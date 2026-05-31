@@ -1,0 +1,40 @@
+
+## POST
+id: INT
+BLOGGER: INT (FOREIGN KEY [blogger])
+title: STR
+test: TEXT
+likes count: INT
+comments_counts: INT
+post_date: DATE
+is_published: BOOL [True]
+photo_main: STR
+photo_1: STR
+photo_2: STR
+photo_3: STR
+photo_4: STR
+photo 5: STR
+photo_6: STR
+
+
+##BLOGGERS 
+id: INT
+first_name: STR
+last_name: STR
+photo: STR
+description: TEXT
+
+email: STR
+phone_number: STR
+post_cout: INT [0]
+birth_date: DATE
+registered_date: DATE
+
+
+## COMMENT
+id: INT
+user_id: INT (can be NULL if user is not registered)
+user_email: STR
+user name: STR
+comment_date: DATE
+comment_text: TEXT

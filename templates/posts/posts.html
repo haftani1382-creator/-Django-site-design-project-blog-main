@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+| پست ها
+{% endblock title %}
+{% block content %}
+
+    <!-- Breadcrumb -->
+    <section id="bc" class="mt-3">
+        <div class="container">
+          <nav>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="{% url 'index' %}">خانه</a>
+              </li>
+              <li class="breadcrumb-item active">
+                پست ها
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </section>
+
+    <!-- Listings -->
+    <section id="listings" class="py-3" style="margin-bottom: 3rem">
+        <div class="container">
+          <h3 class="text-center mb-3">همه پست ها</h3>
+          <div class="row">
+
+            {% if posts %}
+              {% for post in posts %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                  <div class="card listing-preview">
+                    <div style="position: relative">
+                      <img class="card-img-top" src="{{ post.photo_main.url }}" alt="" />
+                      <div class="text-image-config p-1">
+                        <span class="badge text-white" style="background-color: #cb1c8d">{{ post.comments_count | intcomma }} <i
+                            class="fas fa-comment"></i></span>
+                        <span class="badge text-white mr-2" style="background-color: #e0144c">{{ post.likes_count | intcomma }} <i
+                            class="fas fa-heart"></i></span>
+                      </div>
+                    </div>
+                    <!-- <div class="card-body text-truncate" style="display: -webkit-box !important; -webkit-line-clamp: 4; -webkit-box-orient: vertical; white-space: normal"> -->
+                    <div class="card-body" style="font-size: 13px; padding-bottom: 0">
+                      <div class="listing-heading text-right">
+                        <h4 class="text-primary"> {{ post.title }} </h4>
+                        <p><i class="fas fa-pen" style="color: #e0144c"></i> {{ post.blogger }} </p>
+                      </div>
+                      <hr />
+                      <div class="multiline-ellipsis text-right">
+                        {{ post.text  }}
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="px-3 pb-3 pt-0" style="padding-top: 0">
+                      <a href="{% url 'post' post.id %}" class="btn btn-primary btn-block">بیشتر...</a>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            {% else %}
+               <div class="col_md_12">هیچ پستی وجود ندارد</div>
+            {% endif %}   
+            
+          </div>
+  
+          <!-- Pagination -->
+          <div class="row">
+            <div class="col-md-12">
+              {% if posts.has_other_pages %}
+                <ul class="pagination">
+                  {% if posts.has_previous %}
+                  <li class="page-item">
+                    <a href="?page={{posts.previous_page_number}}" class="page-link">&laquo;</a>
+                  </li>
+                  {% else %}  
+                    <li class="page-item disabled">
+                      <a  class="page-link">&laquo;</a>
+                    </li>
+                  {% endif %}
+                  {% for i in posts.paginator.page_range %}
+                     {% if posts.number == i %}
+                       <li class="page-item active">
+                        <a class="page-link">{{i}}</a>
+                       </li>
+                     {% else %}
+                        <li class="page-item">
+                          <a href="?page={{i}}" class="page-link">{{i}}</a>
+                        </li>
+                     {% endif %}
+                  {% endfor %}
+                  {% if posts.has_next %}
+                      <li class="page-item">
+                        <a href="?page={{posts.next_page_number}}" class="page-link">&raquo;</a>
+                      </li>
+                  {% else %}  
+                        <li class="page-item disabled">
+                          <a  class="page-link">&raquo;</a>
+                        </li>
+                  {% endif %}
+                </ul>
+              {% endif %}
+
+            </div>
+          </div>
+        </div>
+   
+    </section>
+    <!-- End Listings -->
+{% endblock content %}

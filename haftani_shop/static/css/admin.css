@@ -1,0 +1,28 @@
+/* استایل دهی به صفحه ادمین و شخصی سازی
+با کمک از  inspect element */
+
+#header{
+
+    background-color: #4723d9;
+}
+
+#branding h1{
+    
+    color: white;
+}
+
+div.breadcrumbs{ 
+    background-color: #6342e7;
+    color: black;
+}
+div.breadcrumbs a{ 
+    color: black;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background-color: #6342e7;
+}
+
+h1#head {
+    font-family: 'iransans';
+}
